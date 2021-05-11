@@ -18,19 +18,16 @@ import kotlinx.android.synthetic.main.activity_news_list.*
 
 class NewsListActivity : AppCompatActivity() {
 
-
     companion object {
 
         var newsDetailkey = "newsdetail"
     }
 
     var newsListViewModel = NewsListViewModel()
-    private var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.activity_news_list)
-
 
         /**
          * Data binding
@@ -48,10 +45,8 @@ class NewsListActivity : AppCompatActivity() {
 
 
 
-
         setObservers()
     }
-
 
     /**
      * Observers
@@ -68,8 +63,6 @@ class NewsListActivity : AppCompatActivity() {
                 val activityOptionsCompat = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(this, constraint, newsDetailkey)
 
-
-
                 startActivity (newsDetail, activityOptionsCompat.toBundle())
             }
         })
@@ -77,27 +70,13 @@ class NewsListActivity : AppCompatActivity() {
 
         newsListViewModel.isLoading.observe(this, Observer { isLoading ->
             if (isLoading) {
-                showDialog(this)
+
+                aviLoader.show()
             } else {
-                dismissDialog(this)
+                aviLoader.hide()
+
             }
         })
-
-
-
     }
 
-    fun showDialog(mContext: Activity) {
-        if (progressDialog == null && !mContext.isFinishing) {
-            progressDialog = ProgressDialog(mContext)
-
-            progressDialog?.show()
-        }
-    }
-
-    fun dismissDialog(mContext: Activity) {
-        if (progressDialog != null && progressDialog!!.isShowing && !mContext.isFinishing)
-            progressDialog?.dismiss()
-        progressDialog = null
-    }
 }

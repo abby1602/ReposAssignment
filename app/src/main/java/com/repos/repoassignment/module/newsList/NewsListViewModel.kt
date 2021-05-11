@@ -121,7 +121,6 @@ class NewsListViewModel : ViewModel() {
     }
 
 
-
     /**
      * News Item Click
      * */
