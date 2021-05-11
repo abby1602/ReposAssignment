@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.repos.repoassignment.module.newsList.NewsListViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:alpha="0.9"
+    android:fitsSystemWindows="true"
+    android:padding="16dip"
+    android:transitionName="newsdetail"
+    tools:context=".module.newsList.NewsListActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/news"
+        android:textColor="@color/white"
+        android:textSize="20dip"
+        android:layout_marginTop="8dip"
+        android:textStyle="italic"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_newsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        app:layout_constraintTop_toBottomOf="@id/txtHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dip"
+        android:visibility="@{viewModel.rvVisibility}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:adapter="@{viewModel.newsAdapter}"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txtHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="@{viewModel.noDataAvailable}"
+        android:text="No News Data!!!"
+        android:textColor="@color/white"
+        android:textSize="20dip"
+        android:layout_marginTop="8dip"
+        android:textStyle="italic"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
